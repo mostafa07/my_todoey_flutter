@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:todoey/models/task.dart';
 
 class TaskTile extends StatelessWidget {
-  TaskTile({@required this.task, @required this.onCheck});
-
   final Task task;
-  final Function onCheck;
+  final Function onCheckCallback;
+  final Function onLongPressCallback;
+
+  TaskTile({
+    @required this.task,
+    @required this.onCheckCallback,
+    this.onLongPressCallback,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +24,9 @@ class TaskTile extends StatelessWidget {
       trailing: Checkbox(
         activeColor: Colors.lightBlueAccent,
         value: task.isDone,
-        onChanged: (isChecked) => onCheck(isChecked),
+        onChanged: onCheckCallback,
       ),
+      onLongPress: onLongPressCallback,
     );
   }
 }
